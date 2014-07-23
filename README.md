@@ -1,1 +1,1 @@
-start application in with '''play run''' in 
+start application in with `play run` in root directory 
