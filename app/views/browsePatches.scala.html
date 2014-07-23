@@ -1,0 +1,111 @@
+@main("Browse Patches") {
+    <div class="container-fluid" ng-app="main" >
+        <div class="row">
+            @* @sidebar(Array(Array("Statistics"), Array("Most Recent", "Most Popular"), Array("By Provenance", "By Reporter", "By Dataset", "By Type"))) *@
+
+            <div class="col-md-1 sidebar">
+
+                <ul class="nav nav-sidebar">
+
+                    <li class="scroll"><a href="#statistics">Statistics</a></li>
+
+                </ul>
+
+                <ul class="nav nav-sidebar">
+                    <li class="scroll"><a href="#" onclick="$('#table-controller').scope().setSorting({lastTime: 'desc'});">Most Recent</a></li>
+                    <li class="scroll"><a href="#" onclick="$('#table-controller').scope().setSorting({advocates: 'desc'});">Most Popular</a></li>
+                </ul>
+
+                <ul class="nav nav-sidebar">
+                    <li class="scroll"><a href="#byprovenance">By Provenance</a></li>
+                    <li class="scroll"><a href="#byreporter">By Reporter</a></li>
+                    <li class="scroll"><a href="#bydataset">By Dataset</a></li>
+                    <li class="scroll"><a href="#bytype">By Type</a></li>
+                </ul>
+
+            </div>
+
+            <div class="col-md-7 col-md-offset-1 main">
+
+                <h2 class="page-header">Browse Patches</h2>
+
+                @*<h3 class="sub-header" id="statistics">Statistics </h3>*@
+                @*<p>*@
+                    @*Currently, there are 5605 unique Patch Requests submitted. More statistics coming soon!*@
+                @*</p>*@
+
+                @*<h3 class="sub-header" id="mostrecent">Most recent Patch Requests </h3>*@
+                <div ng-controller="table-controller" id="table-controller">
+
+                    <div class="buttons">
+                        <div class="pull-left">
+                            <button ng-click="loadData()" data-loading-text="Reloading..." class="btn btn-default" id="load-button">Reload Patches</button>
+                            <button ng-click="toggleFilter()" class="btn btn-default" ng-class="tableParams.filter() ? success : btn">{{ filterButtonText }}</button>
+
+                            <select ng-model="groupby" ng-change="setGrouping(groupby)" class="form-control btn-select">
+                                <option value="null" selected="selected">No Grouping</option>
+                                <option value="subject">Group by subject</option>
+                                <option value="predicate">Group by predicate</option>
+                                <option value="object">Group by object</option>
+                                <option value="graph">Group by graph</option>
+                            </select>
+                        </div>
+                        <div class="pull-right">
+                            <button ng-click="tableParams.filter({})" class="btn btn-default">Clear filter</button>
+                            <button ng-click="tableParams.sorting({})" class="btn btn-default">Clear sorting</button>
+                        </div>
+                    </div>
+
+                    @*<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)" ng-bind-html="alert.msg"></alert>*@
+                    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)" class="fade in">{{alert.msg}}</alert>
+
+
+                    <table ng-table="tableParams" class="table">
+                        <tbody ng-show="!grouped">
+                            <tr ng-repeat="patch in data" class=""
+                                ng-class="patch.action == 'insert' ? 'success' : 'danger'">
+                                <td data-title="'action'" filter="{ 'action': 'text'}" sortable="action">{{patch.action}}</td>
+                                <td data-title="'advocates'" filter="{ 'advocates': 'text'}" sortable="advocates">{{patch.advocates}}</td>
+                                <td data-title="'critics'" filter="{ 'critics': 'text'}" sortable="critics">{{patch.critics}}</td>
+                                <td data-title="'subject'" filter="{ 'subject': 'text'}" sortable="subject">{{patch.subject}}</td>
+                                <td data-title="'predicate'" filter="{ 'predicate': 'text'}" sortable="predicate">{{patch.predicate}}</td>
+                                <td data-title="'object'" filter="{ 'object': 'text'}" sortable="object">{{patch.object}}</td>
+                                <td data-title="'graph'" filter="{ 'graph': 'text'}" sortable="graph">{{patch.graph}}</td>
+                                <td data-title="'last time'" filter="{ 'lastTime': 'text'}" sortable="lastTime">{{patch.lastTime}}</td>
+                            </tr>
+                        </tbody>
+
+                        <tbody ng-repeat="group in $groups" ng-show="grouped">
+                            <tr class="ng-table-group">
+                                <td colspan="{{$columns.length}}">
+                                    <a href="" ng-click="group.$hideRows = !group.$hideRows">
+                                        <span class="glyphicon" ng-class="{ 'glyphicon-chevron-right': group.$hideRows, 'glyphicon-chevron-down': !group.$hideRows }"></span>
+                                        <strong>{{ group.value }}</strong>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr ng-hide="group.$hideRows" ng-repeat="patch in group.data"
+                                ng-class="patch.action == 'insert' ? 'success' : 'danger'">
+                                <td data-title="'action'" filter="{ 'action': 'text'}" sortable="action">{{patch.action}}</td>
+                                <td data-title="'advocates'" filter="{ 'advocates': 'text'}" sortable="advocates">{{patch.advocates}}</td>
+                                <td data-title="'critics'" filter="{ 'critics': 'text'}" sortable="critics">{{patch.critics}}</td>
+                                <td data-title="'subject'" filter="{ 'subject': 'text'}" sortable="subject">{{patch.subject}}</td>
+                                <td data-title="'predicate'" filter="{ 'predicate': 'text'}" sortable="predicate">{{patch.predicate}}</td>
+                                <td data-title="'object'" filter="{ 'object': 'text'}" sortable="object">{{patch.object}}</td>
+                                <td data-title="'graph'" filter="{ 'graph': 'text'}" sortable="graph">{{patch.graph}}</td>
+                                <td data-title="'last time'" filter="{ 'lastTime': 'text'}" sortable="lastTime">{{patch.lastTime}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                @*<h3 class="sub-header" id="mostpopular">Most popular Patch Requests </h3>*@
+                @*<h3 class="sub-header" id="byprovenance">Patch Requests by Provenance </h3>*@
+                @*<h3 class="sub-header" id="byreporter">Patch Requests by Reporter </h3>*@
+                @*<h3 class="sub-header" id="bydataset">Patch Requests by Dataset </h3>*@
+                @*<h3 class="sub-header" id="bytype">Patch Requests by Type </h3>*@
+
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,12 @@
+@(entries: Array[Array[String]])
+
+<div class="col-md-1 sidebar">
+    @for(subentries <- entries) {
+        <ul class="nav nav-sidebar">
+            @for(entry <- subentries) {
+                <li class="scroll"><a href="#@entry.toLowerCase.replace(" ", "")">@entry</a></li>
+            }
+        </ul>
+    }
+</div>
+
