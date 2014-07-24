@@ -1,37 +1,69 @@
-@main("About") {
-    <div class="container-fluid">
-        <div class="row">
-            @sidebar(Array(Array("About", "Contribute")))
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="PatchR-app" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="PatchR-app" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="PatchR-app" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="PatchR-app" class="no-js"> <!--<![endif]-->
 
-            <div class="col-md-7 col-md-offset-1 main">
-                <h2 class="page-header" id="about">About</h2>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>PatchR</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+            <!--<link rel="stylesheet" href="bower_components/html5-boilerplate/css/normalize.css">-->
+            <!--<link rel="stylesheet" href="bower_components/html5-boilerplate/css/main.css">-->
+        <link rel="stylesheet" href="http://bazalt-cms.com/assets/ng-table/0.3.0/ng-table.css" />
+        <link rel="stylesheet" href="@routes.Assets.at("stylesheets/main.css")"/>
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")"/>
+            <!--<script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>-->
+    </head>
 
-                <h3 class="sub-header">About the PatchR Repository</h3>
-                <p>The Web of Data is by no means a perfect world that consists of consistent and valid facts represented by RDF (Resource Description Framework) triples based on RDFS (RDF Schema) and OWL (Web Ontology Language) ontologies. Inconsistencies, ambiguities, confused or conflicting categorization systems, as well as pointless and futile facts need to be identified, reported and straightened out.
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
 
-                    Defects in linked datasets, e.g. semantic and factual errors are hard to detect in an automated manner. Furthermore, the revision of certain errors requires extensive processing of linked datasets. Therefore, we propose a general workflow to share updates between dynamically linked datasets.
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-main">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
 
-                    workflow diagramm for creating and applying a patch
-                    As shown in the workflow diagram, multiple agents independently make use of a particular dataset, accessing it directly or as a local copy. When an agent, whereby the agent may be human or an algorithm, identifies inconsistent facts (RDF triples) in the dataset, he can create a patch request. The patch request describes the update that has to be performed on the dataset to solve the identified issue. An update consists of a set of triples to add and a set of triples to delete in the dataset.
-
-                    This website showcases a simple collaborative workflow for cleansing linked data resources. We gather information about possible flaws in the DBpedia dataset with the help the WhoKnows? game. Detected errors and appropriate updates are published using the Patch Request Ontology (patchR). The repository provides access to corresponding SPARQL updates.
-
-                    So far, the implemented functionality is work in progress, further updates might include:
-
-                    login and rating functionalitys for patches
-                    download of SPARQL update statements for single patches and groups of patches
-                    better search functionality for patches
-                    API to submit patches to the repository
-                    making patches available trough a SPARQL endpoint
-                    You are welcome to send your comments to: Johannes Hercher or Magnus Knuth.
-
-                    Stay tuned!</p>
-
-                <h3 class="sub-header" id="contribute">Contribute</h3>
-                <p>We plan to set up an API to submit patches directly to the repository, which requires authentication, validity checking and some kind of spam protection first. So, if you found inconsistencies for any Linked Dataset and would like to submit your patches, feel free to contact us.
-                    So far, you can submit patches by playing WhoKnows? - a quiz game in the style of 'Who Wants to Be a Millionaire?' that generates questions from DBpedia facts. The game can be played on Facebook or standalone. If you consider a question in WhoKnows? to be strange or wrongly posed, you can report the probable cause for that by selecting from a number of possible inconsistencies after pressing the Dislike button. Your hint will be submitted as a Patch Request to this PatchR Repository.</p>
-
+                    <a class="navbar-brand" href="#/">PatchR Repository</a>
+                </div>
+                <div class="navbar-collapse collapse" id="navbar-main">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#/about">About</a></li>
+                        <li><a href="#/browsePatches">Browse Patches</a></li>
+                        <li><a href="#/statistics">Statistics</a></li>
+                        <li><a href="#/ontology">PatchR Ontology</a></li>
+                        <li><a href="#/contact">Contact</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-}
+
+
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div ng-view></div>
+
+        <!-- In production use:
+           <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+        -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js" type="text/javascript"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="@routes.Assets.at("bower_components/angular/angular.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("bower_components/angular-route/angular-route.js")" type="text/javascript"></script>
+        <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js" type="text/javascript"></script>
+        <script src="//bazalt-cms.com/assets/ng-table/0.3.0/ng-table.js" type="text/javascript"></script>
+        <script src="@routes.Assets.at("js/app.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("js/services.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("js/controllers.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("js/filters.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("js/directives.js")" type="text/javascript"></script>
+    </body>
+</html>

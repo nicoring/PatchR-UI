@@ -2,6 +2,9 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
+# Home Page
+GET         /                         controllers.Application.index()
+
 # Get Patches
 # GET         /patches/:rdfObject       controllers.Application.getPatch()
 GET         /patches                  controllers.Application.getAllPatches()
@@ -10,11 +13,8 @@ GET         /patches                  controllers.Application.getAllPatches()
 POST        /update/:rdfObject        controllers.Application.updatePatch(rdfObject: String)
 POST        /insert                   controllers.Application.insertPatch()
 
-# Extract the page parameter from the path, or fix the value for /
-GET         /                         controllers.Application.show(page = "about")
-GET         /:page                    controllers.Application.show(page: String)
-
-GET         /fonts/*file              controllers.Application.assetRedirect(pathPre="fonts", file)
+# Map the JS resource paths
+GET         /*file                    controllers.Assets.at(path="/public", file)
 
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file             controllers.Assets.at(path="/public", file)
