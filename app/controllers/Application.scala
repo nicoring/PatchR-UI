@@ -203,14 +203,23 @@ object Application extends Controller {
 
   def insertPatch() = TODO
 
+//  def show(page: String) = Action {
+//    page match {
+//      case "about" => Ok(views.html.index())
+//      case "browsePatches" => Ok(views.html.browsePatches())
+//      case "filterPatches" => Ok(views.html.filterPatches())
+//      case "ontology" => Ok(views.html.ontology())
+//      case _ => NotFound(views.html.error.notFound())
+//    }
+//  }
+
   def show(page: String) = Action {
-    page match {
-      case "about" => Ok(views.html.index())
-      case "browsePatches" => Ok(views.html.browsePatches())
-      case "filterPatches" => Ok(views.html.filterPatches())
-      case "ontology" => Ok(views.html.ontology())
-      case _ => NotFound(views.html.error.notFound())
-    }
+    Redirect(routes.Assets.at("index.html"))
+  }
+
+  def assetRedirect(pathPre: String, file: String) = Action {
+    val path = pathPre + "/" + file
+    Redirect(routes.Assets.at(path))
   }
 
 }

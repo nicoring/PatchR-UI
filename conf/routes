@@ -14,6 +14,7 @@ POST        /insert                   controllers.Application.insertPatch()
 GET         /                         controllers.Application.show(page = "about")
 GET         /:page                    controllers.Application.show(page: String)
 
+GET         /fonts/*file              controllers.Application.assetRedirect(pathPre="fonts", file)
 
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file             controllers.Assets.at(path="/public", file)
