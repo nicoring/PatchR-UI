@@ -1,0 +1,85 @@
+<div class="container-fluid" ng-controller="tableController" data-ng-init="loadData()">
+    <div class="row">
+
+        <div class="col-md-1 sidebar">
+
+            <ul class="nav nav-sidebar">
+                <li class="scroll"><p class="link" ng-click="setSorting({lastTime: 'desc'});">Most Recent</p></li>
+                <li class="scroll"><p class="link" ng-click="setSorting({advocates: 'desc'});">Most Popular</p></li>
+            </ul>
+
+            <ul class="nav nav-sidebar">
+                <li class="scroll"><p class="link">By Provenance</p></li>
+                <li class="scroll"><p class="link">By Reporter</p></li>
+                <li class="scroll"><p class="link">By Dataset</p></li>
+                <li class="scroll"><p class="link">By Type</p></li>
+            </ul>
+
+        </div>
+
+        <div class="col-md-7 col-md-offset-1 main">
+
+            <h3 class="sub-header">Browse Patches</h3>
+
+            <div class="buttons">
+                <div class="pull-left">
+                    <button ng-click="loadData()" data-loading-text="Reloading..." class="btn btn-default" id="load-button">Reload Patches</button>
+                    <button ng-click="toggleFilter()" class="btn btn-default" ng-class="tableParams.filter() ? success : btn">{{ filterButtonText }}</button>
+
+                    <select ng-model="groupby" ng-change="setGrouping()" class="form-control btn-select">
+                        <option value="none">No Grouping</option>
+                        <option value="subject">Group by subject</option>
+                        <option value="predicate">Group by predicate</option>
+                        <option value="object">Group by object</option>
+                        <option value="graph">Group by graph</option>
+                    </select>
+                </div>
+                <div class="pull-right">
+                    <button ng-click="tableParams.filter({})" class="btn btn-default">Clear filter</button>
+                    <button ng-click="tableParams.sorting({})" class="btn btn-default">Clear sorting</button>
+                </div>
+            </div>
+
+            <!-- Alerts stored in $scope.alerts rendern bei Angular-UI -->
+            <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)" class="fade in">{{alert.msg}}</alert>
+
+            <table ng-table="tableParams" class="table">
+                <tbody ng-show="!grouped">
+                <tr ng-repeat="patch in data" class=""
+                    ng-class="patch.action == 'insert'?'success':'danger'">
+                    <td data-title="'action'" filter="{ 'action': 'text'}" sortable="action">{{patch.action}}</td>
+                    <td data-title="'advocates'" filter="{ 'advocates': 'text'}" sortable="advocates">{{patch.advocates}}</td>
+                    <td data-title="'critics'" filter="{ 'critics': 'text'}" sortable="critics">{{patch.critics}}</td>
+                    <td data-title="'subject'" filter="{ 'subject': 'text'}" sortable="subject">{{patch.subject}}</td>
+                    <td data-title="'predicate'" filter="{ 'predicate': 'text'}" sortable="predicate">{{patch.predicate}}</td>
+                    <td data-title="'object'" filter="{ 'object': 'text'}" sortable="object">{{patch.object}}</td>
+                    <td data-title="'graph'" filter="{ 'graph': 'text'}" sortable="graph">{{patch.graph}}</td>
+                    <td data-title="'last time'" filter="{ 'lastTime': 'text'}" sortable="lastTime">{{patch.lastTime}}</td>
+                </tr>
+                </tbody>
+
+                <tbody ng-repeat="group in $groups" ng-show="grouped">
+                <tr class="ng-table-group">
+                    <td colspan="{{$columns.length}}">
+                        <a href="" ng-click="group.$hideRows = !group.$hideRows">
+                            <span class="glyphicon" ng-class="{ 'glyphicon-chevron-right': group.$hideRows, 'glyphicon-chevron-down': !group.$hideRows }"></span>
+                            <strong>{{ group.value }}</strong>
+                        </a>
+                    </td>
+                </tr>
+                <tr ng-hide="group.$hideRows" ng-repeat="patch in group.data"
+                    ng-class="patch.action == 'insert' ? 'success' : 'danger'">
+                    <td data-title="'action'" filter="{ 'action': 'text'}" sortable="action">{{patch.action}}</td>
+                    <td data-title="'advocates'" filter="{ 'advocates': 'text'}" sortable="advocates">{{patch.advocates}}</td>
+                    <td data-title="'critics'" filter="{ 'critics': 'text'}" sortable="critics">{{patch.critics}}</td>
+                    <td data-title="'subject'" filter="{ 'subject': 'text'}" sortable="subject">{{patch.subject}}</td>
+                    <td data-title="'predicate'" filter="{ 'predicate': 'text'}" sortable="predicate">{{patch.predicate}}</td>
+                    <td data-title="'object'" filter="{ 'object': 'text'}" sortable="object">{{patch.object}}</td>
+                    <td data-title="'graph'" filter="{ 'graph': 'text'}" sortable="graph">{{patch.graph}}</td>
+                    <td data-title="'last time'" filter="{ 'lastTime': 'text'}" sortable="lastTime">{{patch.lastTime}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

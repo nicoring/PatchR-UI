@@ -1,0 +1,45 @@
+<div class="container-fluid" ng-controller="aboutController" >
+    <div class="row">
+
+        <div class="col-md-1 sidebar">
+
+            <ul class="nav nav-sidebar">
+
+                <li class="scroll"><a href="#about">About</a></li>
+                <li class="scroll"><a href="#contribute">Contribute</a></li>
+
+            </ul>
+
+        </div>
+
+        <div class="col-md-7 col-md-offset-1 main">
+
+            <h3 class="sub-header" id="about">About the PatchR Repository</h3>
+            <p>The Web of Data is by no means a perfect world that consists of consistent and valid facts represented by RDF (Resource Description Framework) triples based on RDFS (RDF Schema) and OWL (Web Ontology Language) ontologies. Inconsistencies, ambiguities, confused or conflicting categorization systems, as well as pointless and futile facts need to be identified, reported and straightened out.
+
+                Defects in linked datasets, e.g. semantic and factual errors are hard to detect in an automated manner. Furthermore, the revision of certain errors requires extensive processing of linked datasets. Therefore, we propose a general workflow to share updates between dynamically linked datasets.
+
+                workflow diagramm for creating and applying a patch
+                As shown in the workflow diagram, multiple agents independently make use of a particular dataset, accessing it directly or as a local copy. When an agent, whereby the agent may be human or an algorithm, identifies inconsistent facts (RDF triples) in the dataset, he can create a patch request. The patch request describes the update that has to be performed on the dataset to solve the identified issue. An update consists of a set of triples to add and a set of triples to delete in the dataset.
+
+                This website showcases a simple collaborative workflow for cleansing linked data resources. We gather information about possible flaws in the DBpedia dataset with the help the WhoKnows? game. Detected errors and appropriate updates are published using the Patch Request Ontology (patchR). The repository provides access to corresponding SPARQL updates.
+
+                So far, the implemented functionality is work in progress, further updates might include:
+
+                login and rating functionalitys for patches
+                download of SPARQL update statements for single patches and groups of patches
+                better search functionality for patches
+                API to submit patches to the repository
+                making patches available trough a SPARQL endpoint
+                You are welcome to send your comments to: Johannes Hercher or Magnus Knuth.
+
+                Stay tuned!</p>
+
+            <h3 class="sub-header" id="contribute">Contribute</h3>
+            <p>We plan to set up an API to submit patches directly to the repository, which requires authentication, validity checking and some kind of spam protection first. So, if you found inconsistencies for any Linked Dataset and would like to submit your patches, feel free to contact us.
+                So far, you can submit patches by playing WhoKnows? - a quiz game in the style of 'Who Wants to Be a Millionaire?' that generates questions from DBpedia facts. The game can be played on Facebook or standalone. If you consider a question in WhoKnows? to be strange or wrongly posed, you can report the probable cause for that by selecting from a number of possible inconsistencies after pressing the Dislike button. Your hint will be submitted as a Patch Request to this PatchR Repository.</p>
+
+        </div>
+    </div>
+</div>
+
