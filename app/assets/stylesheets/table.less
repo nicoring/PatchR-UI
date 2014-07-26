@@ -37,10 +37,15 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-}
 
-.buttons .btn {
-  width: 125px;
+  .btn {
+    width: 125px;
+  }
+
+  #load-button:disabled {
+    cursor: progress !important;
+    pointer-events: auto !important;
+  }
 }
 
 .ng-table-filters {
