@@ -1,4 +1,4 @@
-<div class="container-fluid" ng-controller="tableController" data-ng-init="loadData()">
+<div class="container-fluid" ng-controller="tableCtrl" data-ng-init="loadData()">
     <div class="row">
 
         <div class="col-md-1 sidebar">
@@ -54,7 +54,7 @@
                     <td data-title="'predicate'" filter="{ 'predicate': 'text'}" sortable="predicate">{{patch.predicate}}</td>
                     <td data-title="'object'" filter="{ 'object': 'text'}" sortable="object">{{patch.object}}</td>
                     <td data-title="'graph'" filter="{ 'graph': 'text'}" sortable="graph">{{patch.graph}}</td>
-                    <td data-title="'last time'" filter="{ 'lastTime': 'text'}" sortable="lastTime">{{patch.lastTime}}</td>
+                    <td data-title="'last time'" filter="{ 'lastTime': 'text'}" sortable="lastTime">{{patch.lastTime | date}}</td>
                 </tr>
                 </tbody>
 
@@ -76,7 +76,7 @@
                     <td data-title="'predicate'" filter="{ 'predicate': 'text'}" sortable="predicate">{{patch.predicate}}</td>
                     <td data-title="'object'" filter="{ 'object': 'text'}" sortable="object">{{patch.object}}</td>
                     <td data-title="'graph'" filter="{ 'graph': 'text'}" sortable="graph">{{patch.graph}}</td>
-                    <td data-title="'last time'" filter="{ 'lastTime': 'text'}" sortable="lastTime">{{patch.lastTime}}</td>
+                    <td data-title="'last time'" filter="{ 'lastTime': 'text'}" sortable="lastTime">{{patch.lastTime | date}}</td>
                 </tr>
                 </tbody>
             </table>
