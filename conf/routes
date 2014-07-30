@@ -3,15 +3,18 @@
 # ~~~~
 
 # Home Page
-GET         /                         controllers.Application.index()
+GET         /                         controllers.AppController.index()
 
 # Get Patches
 # GET         /patches/:rdfObject       controllers.Application.getPatch()
-GET         /patches                  controllers.Application.getAllPatches()
+GET         /patches                  controllers.RESTController.getPatches()
 
 # Update and insert Patches
-POST        /update/:rdfObject        controllers.Application.updatePatch(rdfObject: String)
-POST        /insert                   controllers.Application.insertPatch()
+POST        /update/:rdfObject        controllers.RESTController.updatePatch(rdfObject: String)
+POST        /insert                   controllers.RESTController.insertPatch()
+
+# Login Routes
+POST        /login                    controllers.LoginController.login()
 
 # Map the JS resource paths
 GET         /*file                    controllers.Assets.at(path="/public", file)

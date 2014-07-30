@@ -1,27 +1,26 @@
 package controllers
 
-import play.api._
 import play.api.libs.json.Json._
 import play.api.mvc._
-import play.api.libs.json._
 
-object Application extends Controller {
-
-  def getPatch() = Action { //request =>
-    //val requestedObject = (request.body \ "object").asOpt[String]
+/**
+ * Created by nico on 27.07.14.
+ */
+object RESTController extends Controller {
+  def getPatches() = Action {
     Ok(toJson(
       Map(
         "patches" -> Seq(
           toJson(
             Map(
-            "action" -> toJson("insert"),
-            "advocates" -> toJson(5),
-            "critics" -> toJson(0),
-            "subject" -> toJson("dbp:Oregon"),
-            "predicate" -> toJson("dbo:language"),
-            "object" -> toJson("dbp:English_language"),
-            "graph" -> toJson("http://dbpedia.org/"),
-            "lastTime" -> toJson("2012-04-17 11:24:42")
+              "action" -> toJson("insert"),
+              "advocates" -> toJson(5),
+              "critics" -> toJson(0),
+              "subject" -> toJson("dbp:Oregon"),
+              "predicate" -> toJson("dbo:language"),
+              "object" -> toJson("dbp:English_language"),
+              "graph" -> toJson("http://dbpedia.org/"),
+              "lastTime" -> toJson("2012-04-17 11:24:42")
             )
           ),
           toJson(
@@ -196,15 +195,7 @@ object Application extends Controller {
     )
   }
 
-  def getAllPatches() =
-    getPatch()
-
   def updatePatch(rdfObject: String) = TODO
 
   def insertPatch() = TODO
-
-  def index() = Action {
-    Ok(views.html.index())
-  }
-
 }
