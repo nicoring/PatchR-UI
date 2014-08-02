@@ -5,7 +5,8 @@
 var app = angular.module('PatchR-app', [
     'ngTable',
     'ngRoute',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'simple-login'
 ]);
 
 app.config(['$routeProvider', function($routeProvider) {

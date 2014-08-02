@@ -19,12 +19,15 @@
 
         <div class="col-md-7 col-md-offset-1 main">
 
+            <button class="btn btn-default" ng-click="login()">{{loginButtonText}}</button>
+
             <h3 class="sub-header">Browse Patches</h3>
+
 
             <div class="buttons">
                 <div class="pull-left">
                     <button ng-click="loadData()" data-loading-text="Reloading..." class="btn btn-default" id="load-button">Reload Patches</button>
-                    <button ng-click="toggleFilter()" class="btn btn-default" ng-class="tableParams.filter() ? success : btn">{{ filterButtonText }}</button>
+                    <button ng-click="toggleFilter()" class="btn btn-default">{{ filterButtonText }}</button>
 
                     <select ng-model="groupby" ng-change="setGrouping()" class="form-control btn-select">
                         <option value="none">No Grouping</option>

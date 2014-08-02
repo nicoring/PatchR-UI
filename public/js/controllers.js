@@ -6,7 +6,7 @@ app.controller('aboutCtrl', function($scope) {
     window.document.title = "PatchR - About";
 
 });
-app.controller('tableCtrl', function($scope, $filter, $http, ngTableParams) {
+app.controller('tableCtrl', ['$scope', '$filter', '$http', 'ngTableParams', 'loginService' ,function($scope, $filter, $http, ngTableParams, loginService) {
 
     window.document.title = "PatchR - Browse patches";
 
@@ -22,6 +22,24 @@ app.controller('tableCtrl', function($scope, $filter, $http, ngTableParams) {
     // initialize arrays for patches and alerts
     $scope.patches = [];
     $scope.alerts = [];
+
+    // login if not logged in, logout user else
+    $scope.login = function() {
+        if (loginService.getLoginStatus()) {
+            loginService.logout();
+            if (!loginService.getLoginStatus()) {
+                $scope.loginButtonText = 'Login';
+            }
+        } else {
+            loginService.login($scope);
+            if (loginService.getLoginStatus()) {
+                $scope.loginButtonText = 'Logout';
+            }
+        }
+    };
+
+    $scope.loginButtonText = 'Login';
+
 
     // create a table, with parameter and setting object
     $scope.tableParams = new ngTableParams({
@@ -125,7 +143,7 @@ app.controller('tableCtrl', function($scope, $filter, $http, ngTableParams) {
     $scope.closeAlert = function(index) {
         $scope.alerts.splice(index, 1);
     };
-});
+}]);
 app.controller('statisticCtrl', function($scope, $http) {
     window.document.title = "PatchR - Statistics";
 
