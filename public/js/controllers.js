@@ -6,7 +6,7 @@ app.controller('aboutCtrl', function($scope) {
     window.document.title = "PatchR - About";
 
 });
-app.controller('tableCtrl', ['$scope', '$filter', '$http', 'ngTableParams', 'loginService' ,function($scope, $filter, $http, ngTableParams, loginService) {
+app.controller('tableCtrl', ['$scope', '$filter', '$http', 'ngTableParams', 'loginService', function($scope, $filter, $http, ngTableParams, loginService) {
 
     window.document.title = "PatchR - Browse patches";
 
