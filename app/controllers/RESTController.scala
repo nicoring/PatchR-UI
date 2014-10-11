@@ -6,8 +6,9 @@ import play.api.mvc._
 /**
  * Created by nico on 27.07.14.
  */
-object RESTController extends Controller {
-  def getPatches() = Action {
+object RESTController extends Controller with Secured{
+
+  def getPatches() = withAuth { username => implicit request =>
     Ok(toJson(
       Map(
         "patches" -> Seq(

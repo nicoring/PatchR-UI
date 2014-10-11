@@ -2,10 +2,6 @@ package models
 
 import sun.util.calendar.CalendarDate
 
-/**
- * Created by nico on 28.06.14.
- */
-
 case class Patch(
   action: Enumeration,
   advocates: Int,

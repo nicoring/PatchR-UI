@@ -42,48 +42,47 @@ login_module.factory('loginService', ['$http', '$modal', function($http, $modal)
 
         modalInstance.result.then(function(userInput) {
 
+            console.log(userInput);
+
             user.mail = userInput.mail;
 
             $http.post('/login', userInput)
                 .success(function(response) {
-
                     console.log('response: ', response);
                     //todo check status
-                    if (true) {
-                        loggedIn = true;
-                        //todo get id
+                    loggedIn = true;
+                    //todo get id
 //                        loginID = response.data.id;
 
-                        var loginModalSuccessCtrl = function($scope, $modalInstance) {
-                            $scope.ok = function () {
-                                $modalInstance.close();
-                            };
+                    var loginModalSuccessCtrl = function ($scope, $modalInstance) {
+                        $scope.ok = function () {
+                            $modalInstance.close();
+                        };
+                    };
+
+                    $modal.open({
+                        templateUrl: 'partials/tpl/loginModalSuccess.tpl.html',
+                        controller: loginModalSuccessCtrl
+                    }).result.then();
+                })
+                .error(function() {
+                    loggedIn = false;
+                    loginID = null;
+
+                    var loginModalErrorCtrl = function($scope, $modalInstance) {
+                        $scope.ok = function () {
+                            $modalInstance.close();
                         };
 
-                        $modal.open({
-                            templateUrl: 'partials/tpl/loginModalSuccess.tpl.html',
-                            controller: loginModalSuccessCtrl
-                        }).result.then()
-
-                    } else {
-                        loggedIn = false;
-                        loginID = null;
-
-                        var loginModalErrorCtrl = function($scope, $modalInstance) {
-                            $scope.ok = function () {
-                                $modalInstance.close();
-                            };
-
-                            $scope.cancel = function () {
-                                $modalInstance.dismiss('cancel');
-                            };
+                        $scope.cancel = function () {
+                            $modalInstance.dismiss('cancel');
                         };
+                    };
 
-                        $modal.open({
-                            templateUrl: 'partials/tpl/loginModalError.tpl.html',
-                            controller: loginModalErrorCtrl
-                        }).result.then(function() {loginService.login()})
-                    }
+                    $modal.open({
+                        templateUrl: 'partials/tpl/loginModalError.tpl.html',
+                        controller: loginModalErrorCtrl
+                    }).result.then(function() {loginService.login()})
                 })
         });
     };

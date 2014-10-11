@@ -13,8 +13,10 @@ GET         /patches                  controllers.RESTController.getPatches()
 POST        /update/:rdfObject        controllers.RESTController.updatePatch(rdfObject: String)
 POST        /insert                   controllers.RESTController.insertPatch()
 
-# Login Routes
-POST        /login                    controllers.LoginController.login()
+# Auth Routes
+POST        /login                    controllers.Auth.authenticate()
+GET         /logout                   controllers.Auth.logout()
+POST        /register                 controllers.Auth.register()
 
 # Map the JS resource paths
 GET         /*file                    controllers.Assets.at(path="/public", file)

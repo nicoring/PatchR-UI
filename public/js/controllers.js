@@ -144,6 +144,7 @@ app.controller('tableCtrl', ['$scope', '$filter', '$http', 'ngTableParams', 'log
         $scope.alerts.splice(index, 1);
     };
 }]);
+
 app.controller('statisticCtrl', function($scope, $http) {
     window.document.title = "PatchR - Statistics";
 
@@ -152,6 +153,7 @@ app.controller('statisticCtrl', function($scope, $http) {
 //        })
 
 });
+
 app.controller('ontologyCtrl', function($scope) {
     window.document.title = "PatchR - Ontology";
 
